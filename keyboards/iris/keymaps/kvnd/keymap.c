@@ -19,6 +19,7 @@ enum {
 
 #define KC_RASE MO(1)
 #define KC_LWR MO(2)
+#define KC_OTR MO(3)
 
 
 #define KC_ZALT MT(MOD_LALT, KC_Z)
@@ -34,11 +35,12 @@ enum {
 #define KC_XBCK LCTL(LGUI(KC_LEFT)) // XCode - History Back
 #define KC_XFWD LCTL(LGUI(KC_RIGHT)) // XCode - History Forward
 
+#define KC_SWAP LCTL(KC_T)
 #define KC_ALRD LGUI(KC_SPACE) // Toggle Alfred
 
-#define KC_LOCK LGUI(LCTL(KC_Q)) // Lock the screen
+#define KC_LOCK HYPR(KC_L) // Lock the screen via Alfred
 #define KC_SCST SHOT_MACRO // Screenshot Macro
-#define KC_FCS HYPR(KC_F)
+#define KC_FCS HYPR(KC_F) // Trigger Focus
 
 //Tap Dance Definitions
 // qk_tap_dance_action_t tap_dance_actions[] = {
@@ -58,25 +60,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      TAB , Q  , W  , E  , R  , T  ,                Y  , U  , I  , O  , P  ,LBRACKET,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     RASE, A  , S  , D  , F  , G  ,                H  , J  , K  , L  ,SCLN,QUOT,
+     RASE, A  , S  , D  , F  , G  ,                H  , J  , K  , L  ,SCLN, QUOT,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LSFT,ZALT, X  , C  , V  , B  ,BSPC,          , N  , M  ,COMM,DOT ,SLSH,RASE,
+     LSFT,ZALT, X  , C  , V  , B  ,BSPC,          , N  , M  ,COMM,DOT ,SLSH,LWR,
   //`i----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                       TCTL,LGUI,ENT,          SPC ,ALRD,LWR
+                       TCTL,LGUI,ENT,          SPC ,ALRD,OTR
   //                  `----+----+----'        `----+----+----'
   ),
 
   KC_KEYMAP(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-         ,MUTE,MRWD,MFFD,MPLY,    ,                   ,    ,    ,    ,BSLASH,EQUAL,
+     LOCK,MUTE,MRWD,MFFD,MPLY,    ,                   ,    , 8  ,    ,BSLASH,EQUAL,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-         ,VOLU,    ,    ,    ,    ,                   ,WLFT, UP ,WRHT,    ,RBRACKET,
+         , 1  , 2  , 3  , 4  , 5  ,                6  , 7  , UP , 9  ,  0 ,RBRACKET,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-         ,VOLD,SCST,    ,    ,    ,                   ,LEFT,DOWN,RGHT,    ,CLAE,
+         ,VOLD,VOLU,    ,SCST,    ,               WLFT,LEFT,DOWN,RGHT,WRHT,    ,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-         ,    ,    ,   ,     ,    , DEL      ,    ,    ,   ,XBCK,XFWD,CCRL,    ,
+         ,    ,    ,   ,     ,SCST,         ,    ,    ,    ,    ,    ,    ,    ,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                           ,     ,BSPC,        ENT ,    ,    
+                           ,     ,LCBR,         LBRC, DOT,EQUAL
   //                  `----+----+----'        `----+----+----'
   ),
 
@@ -84,15 +86,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
          ,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,    ,
+         ,EXLM, AT ,HASH, DLR,PERC,              ,CIRC,AMPR,ASTR,LPRN,RPRN,
+  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+         ,CIRC,AMPR,ASTR,LPRN,RPRN,                   ,    ,    ,    ,    ,    ,
+  //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
+         ,    ,    ,    ,    ,    ,         ,    ,    ,    ,    ,    ,BSLS,    ,
+  //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
+                           ,SLSH,RCBR,         RBRC, DOT,EQUAL
+  //                  `----+----+----'        `----+----+----'
+  ),
+
+  KC_KEYMAP(
+  //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
+     LOCK,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
          ,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,    ,
+  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+         ,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,CLAE,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-         ,    ,    ,   ,     ,    ,         ,    ,    ,    , FCS,    ,BTN2,LOCK,
+         ,    ,    ,   ,     ,    ,         ,    ,    ,   ,XBCK,XFWD,CCRL,    ,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                           ,     ,    ,            ,    ,    
+                           ,    ,    ,             ,    ,
   //                  `----+----+----'        `----+----+----'
-  )
+  ),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
