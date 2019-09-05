@@ -30,6 +30,13 @@ enum {
 #define KC_WLFT LALT(KC_LEFT) // WORD LEFT
 #define KC_WRHT LALT(KC_RIGHT) // WORD RIGHT
 
+#define KC_XEDT LCTL(LGUI(KC_T)) // XCode - New Editor
+#define KC_XEDB LALT(LCTL(LGUI(KC_T))) // XCode - New Editor Below
+#define KC_XECL LALT(LCTL(LGUI(KC_W))) // XCode - Close Editor
+#define KC_XECO LSFT(LALT(LCTL(LGUI(KC_W)))) // XCode - Close Other Editor
+#define KC_XEDF LSFT(LCTL(LGUI(KC_ENT))) // XCode - Focus Editor
+#define KC_XMIN LSFT(LCTL(LGUI(KC_M))) // XCode - Toggle Minimap
+
 #define KC_CCRL LCTL(KC_GRAVE) // XCode - Change Editor
 #define KC_CLAE HYPR(KC_GRAVE) // XCode - Close Editor
 #define KC_XBCK LCTL(LGUI(KC_LEFT)) // XCode - History Back
@@ -102,9 +109,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
          ,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,    ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-         ,    ,    ,    ,    ,    ,                   ,    ,    ,    ,    ,CLAE,
+         ,    ,    ,    ,    ,    ,                   ,    ,XEDT,XEDB,XECL,XEDF,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-         ,    ,    ,   ,     ,    ,         ,    ,    ,   ,XBCK,XFWD,CCRL,    ,
+         ,    ,    ,   ,     ,    ,         ,    ,    ,   ,XBCK,XFWD,CCRL,XECO,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                            ,    ,    ,             ,    ,
   //                  `----+----+----'        `----+----+----'
